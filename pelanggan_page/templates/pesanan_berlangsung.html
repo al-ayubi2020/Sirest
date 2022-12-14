@@ -1,0 +1,54 @@
+<!-- prettier-ignore -->
+{% extends 'base_pelanggan.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_pelanggan.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Pesanan Berlangsung</h1>
+    <div class="overflow-x-auto mt-5" style="margin-top: 100px">
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th></th>
+            <th>Restoran</th>
+            <th>Waktu Pesanan Dibuat</th>
+            <th>Status Pesanan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          <tr>
+            <th>1</th>
+            <td>Warung Mantap Depok</td>
+            <td>2022-11-04 11:30:05</td>
+            <td>Menunggu Konfirmasi Restoran</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn">
+                  <a
+                    href="{% url 'pelanggan_page:ringkasan' %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+    </div>
+  </div>
+</div>
+{% endblock content %}

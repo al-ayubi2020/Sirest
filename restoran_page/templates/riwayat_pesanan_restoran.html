@@ -1,0 +1,58 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <div class="overflow-x-auto mt-5">
+      <p class="text-4xl font-bold text-center">Riwayat Pesanan</p>
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th>No</th>
+            <th>Nama Pelanggan</th>
+            <th>Nama Kurir</th>
+            <th>Waktu Pesanan Dibuat</th>
+            <th>Status Pesanan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          {% for history in  restaurant_query %}
+          <tr>
+            <th>{{forloop.counter}}</th>
+            <td>{{history.pelanggan}}</td>
+            <td>{{history.kurir}}</td>
+            <td>{{history.waktu}}</td>
+            <td>{{history.status}}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="/pesanan/riwayat/detail/{{history.waktu}}/{{history.email}}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <!-- row 2 -->
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

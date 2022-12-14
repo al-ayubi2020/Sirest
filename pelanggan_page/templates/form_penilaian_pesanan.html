@@ -1,0 +1,96 @@
+<!-- prettier-ignore -->
+{% extends 'base_pelanggan.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_pelanggan.html' %}
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
+  <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+    <h1 class="font-bold text-center text-2xl mb-5">Nilai Pesanan</h1>
+    <div class="form-container form-input  flex-wrap flex-row ">
+      <form method="POST" action="" id="newForm">
+      {% csrf_token %}
+    <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+      <div class="px-5 py-7">
+        
+        <label class="font-semibold text-sm text-gray-600 pb-1 block"
+          >Nilai</label
+        >
+        <select
+          class="select select-bordered w-full mb-5 mt-1"
+          name = "nilai"id="nilai"
+        >
+          <option disabled selected>Pilih nilai</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <button
+          type="button"
+          class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
+          type="submit" name="submit"
+          >
+          <span class="inline-block mr-2">Simpan</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-4 h-4 inline-block"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="py-5">
+      <div class="grid grid-cols-2 gap-1">
+        <div class="text-center sm:text-left whitespace-nowrap">
+          <a href="{% url 'pelanggan_page:riwayat_pesanan_pelanggan' %}">
+            <button
+              class="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-4 h-4 inline-block align-text-top"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              <span class="inline-block ml-1"
+                ><a href="{% url 'pelanggan_page:riwayat_pesanan_pelanggan' %}">
+                  Back</a
+                ></span
+              >
+            </button>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,52 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Detail Pesanan</h1>
+    <div class="mt-10">
+      <p class="mb-5">Waktu Pemesanan: {{list.datetime}}</p>
+      <p>Nama Pelanggan: {{list.fname}} {{list.lname}}</p>
+      <p>Jalan: {{list.street}}</p>
+      <p>Kecamatan: {{list.district}}</p>
+      <p>Kota: {{list.city}}</p>
+      <p class="mb-5">Provinsi: {{list.province}}</p>
+      <p>Restoran: {{list.rname}}</p>
+      <p>Jalan: {{list.street}}</p>
+      <p>Kecamatan: {{list.district}}</p>
+      <p>Kota: {{list.city}}</p>
+      <p class="mb-5">Provinsi: {{list.province}}</p>
+      <p>Makanan yang dipesan:</p>
+      <p class="ml-5">{{list.foodname}} ({{list.amount}}) - {{list.note}}</p>
+      <p>Total Harga Makanan: {{list.totalprice}}</p>
+      <p>Total Diskon: {{list.totaldiscount}}</p>
+      <p>Biaya Pengantaran: {{list.deliveryfee}}</p>
+      <p>Total Biaya: 15000</p>
+      <p class="mb-5">Jenis Pembayaran: {{list.pembayaran}}</p>
+      <p>Status Pembayaran: {{list.status}}</p>
+      <p class="mb-5">Status Pesanan: {{list.trastatus}}</p>
+      <p>Kurir: {{list.courierid}}</p>
+      <p>Plat Kendaraan: {{list.platenum}}</p>
+      <p>Jenis Kendaraan: {{list.vehicletype}}</p>
+      <p>Merk Kendaraan: {{list.vehiclebrand}}</p>
+      <a href="{% url 'restoran_page:daftar_pesanan_berlangsung_restoran' %}">
+        <button
+          type="button"
+          class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block max-w-md"
+        >
+          <span class="inline-block mr-2">KEMBALI</span>
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

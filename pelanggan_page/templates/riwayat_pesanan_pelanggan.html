@@ -1,0 +1,67 @@
+<!-- prettier-ignore -->
+{% extends 'base_pelanggan.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_pelanggan.html' %}
+
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <div class="overflow-x-auto mt-5">
+      <table class="table w-full table-normal">
+        <thead class="">
+          <tr>
+            <th class="justify-content-center text-center">No</th>
+            <th class="justify-content-center text-center">Restoran</th>
+            <th class="justify-content-center text-center">Nama Kurir</th>
+            <th class="justify-content-center text-center">
+              Waktu Pesanan Dibuat
+            </th>
+            <th class="justify-content-center text-center">Status Pesanan</th>
+            <th class="justify-content-center text-center">Rating</th>
+            <th class="justify-content-center text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for history in customer_query %}
+          <tr>
+            <td align="center">{{forloop.counter}}</td>
+            <td align="center">{{history.restaurant}}</td>
+            <td align="center">{{history.kurir}}</td>
+            <td align="center">{{history.waktu}}</td>
+            <td align="center">{{history.status}}</td>
+            <td align="center">{{history.rating}}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-danger text-white">
+                  <a
+                    href="/pesanan/riwayat/detail/{{history.email}}/{{history.waktu}}"
+                    class="text-white"
+                    >Detail</a
+                  ></button>
+                 {% if ({{history.rating != 0}}) %}
+                <button class="btn btn-danger">
+                  <a
+                    href="{% url 'pelanggan_page:show_form_penilaian' %}"
+                    class="text-white"
+                    >Nilai</a
+                  >
+                </button>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

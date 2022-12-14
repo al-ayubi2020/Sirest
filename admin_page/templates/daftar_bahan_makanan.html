@@ -1,0 +1,36 @@
+<!-- prettier-ignore -->
+{% extends 'base_admin.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore --> 
+{% block content %}
+{% include 'navbar.html' %}
+<h1 class="text-red-500">Tabel Bahan Makanan:</h1>
+<table class="table-auto">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama Bahan Makanan</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in list_bahan %}
+      <tr>
+        <td>{{i.no}}</td>
+        <td>{{i.bahan}}</td>
+        {% if i.jumlah_refer < 1 %}
+        <td><a type="button" class="btn btn-primary" href="{% url 'admin_page:hapus_bahan_makanan' i.id %}">[Hapus]</a></td>
+        {% endif %}
+        
+      </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock content %}

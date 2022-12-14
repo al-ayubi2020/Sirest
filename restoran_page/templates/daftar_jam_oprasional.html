@@ -1,0 +1,60 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <div class="overflow-x-auto mt-5">
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th></th>
+            <th>Hari</th>
+            <th>Jam Buka</th>
+            <th>Jam Tutup</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          {% for data in list %}
+          <tr>
+            <th></th>
+            <td>{{data.day}}</td>
+            <td>{{data.start}}</td>
+            <td>{{data.end}}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="/restoran/daftar-jam-oprasional/edit/?day={{data.day}}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Ubah
+                  </a>
+                </button>
+                <a
+                  href="/restoran/daftar-jam-oprasional/hapus/?day={{data.day}}"
+                >
+                  <button class="btn">Hapus</button>
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+          <!-- row 2 -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

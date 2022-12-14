@@ -1,0 +1,57 @@
+<!-- prettier-ignore -->
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Tarif Pengiriman per KM</title>
+{% endblock meta %}
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_admin.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <div class="overflow-x-auto mt-5">
+      <table class="table w-full table-normal">
+        <thead class="">
+          <tr>
+            <th></th>
+            <th>Provinsi</th>
+            <th>Tarif Motor</th>
+            <th>Tarif Mobil</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in list_tarif %}
+          <tr>
+            <th>{{ forloop.counter }}</th>
+            {% for each_data in data.tarif %}
+            <td>{{each_data}}</td>
+            {% endfor %}
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="{% url 'admin_page:tarif_pengiriman_update' data.id %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Ubah
+                  </a>
+                </button>
+                <button class="btn bg-red-500">
+                  <a
+                    href="{% url 'admin_page:tarif_pengiriman_delete' data.id %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Hapus
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

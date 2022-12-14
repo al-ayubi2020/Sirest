@@ -1,0 +1,61 @@
+<!-- prettier-ignore -->
+{% extends 'base_kurir.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_kurir.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <div class="overflow-x-auto mt-5">
+      <h1 class="justify-content-center text-5xl font-bold" align="center">
+        Riwayat Transaksi Pesanan
+      </h1>
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th class="justify-content-center text-center">No</th>
+            <th class="justify-content-center text-center">
+              Restoran - Cabang
+            </th>
+            <th class="justify-content-center text-center">Nama Pelanggan</th>
+            <th class="justify-content-center text-center">
+              Waktu Pesanan Dibuat
+            </th>
+            <th class="justify-content-center text-center">Status Pesanan</th>
+            <th class="justify-content-center text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          {% for history in courier_query %}
+          <tr>
+            <td align="center">{{forloop.counter}}</td>
+            <td align="center">{{history.restaurant}}</td>
+            <td align="center">{{history.pelanggan}}</td>
+            <td align="center">{{history.waktu}}</td>
+            <td align="center">{{history.status}}</td>
+            <td align="center">
+              <button class="btn btn-danger">
+                <a
+                  href="/pesanan/riwayat/detail/{{history.email}}/{{history.waktu}}"
+                  class="text-white"
+                  >Detail</a
+                >
+              </button>
+            </td>
+          </tr>
+          <!-- row 2 -->
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,60 @@
+<!-- prettier-ignore -->
+{% extends 'base_pelanggan.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Makanan</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_pelanggan.html' %}
+
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <div class="overflow-x-auto mt-5">
+      <table class="table w-full table-normal">
+        <thead class="">
+          <tr>
+            <th></th>
+            <th>Nama - Cabang Restoran</th>
+            <th>Rating</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for data in restaurant %}
+            <tr>
+              <th>{{forloop.counter}}</th>
+              <td>{{data.name}}</td>
+              <td>{{data.rating}}</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-active">
+                    <a
+                      href="{% url 'pelanggan_page:makanan_detail_pelanggan' data.url %}"
+                      class="h-full w-full flex items-center justify-center"
+                    >
+                      Detail
+                    </a>
+                  </button>
+                  <button class="btn">
+                    <a
+                      href="{% url 'pelanggan_page:makanan_menu_pelanggan' data.url %}"
+                      class="h-full w-full flex items-center justify-center"
+                    >
+                      Menu
+                  </button>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,89 @@
+<div class="navbar bg-base-100 shadow-lg">
+  <div class="flex-none lg:hidden">
+    <label for="my-drawer" class="btn btn-square btn-ghost">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="inline-block w-5 h-5 stroke-current"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
+      </svg>
+    </label>
+  </div>
+  <div class="flex-1">
+    <a class="btn btn-ghost normal-case text-xl">SIREST</a>
+  </div>
+  <label class="btn btn-ghost hidden lg:flex"
+    ><a
+      href="{% url 'pelanggan_page:index' %}"
+      class="h-full w-full items-center justify-center flex"
+      >Dashboard</a
+    ></label
+  >
+  <label class="btn btn-ghost hidden lg:flex">
+    <a
+      href="{% url 'pelanggan_page:makanan_pelanggan' %}"
+      class="h-full w-full items-center justify-center flex"
+      >Daftar Restoran dan Makanan</a
+    >
+  </label>
+  <div class="dropdown dropdown-end hidden lg:block">
+    <label tabindex="0" class="btn btn-ghost"> Pesanan </label>
+    <ul
+      tabindex="0"
+      class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+    >
+      <li><a href="{% url 'pelanggan_page:pesan' %}"
+      class="h-full w-full items-center justify-center flex"
+      >Buat Pesanan</a></li>
+      <li>
+        <a> Pesanan Berlangsung </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'pelanggan_page:riwayat_pesanan_pelanggan' %}"
+          class="h-full w-full items-center justify-center flex"
+          >Riwayat Pesanan</a
+        >
+      </li>
+    </ul>
+  </div>
+  <label class="btn btn-ghost hidden lg:flex"
+    ><a
+      href="{% url 'pelanggan_page:restopay' %}"
+      class="h-full w-full items-center justify-center flex"
+    >
+      RestoPay</a
+    ></label
+  >
+  <div class="dropdown dropdown-end">
+    <label tabindex="0" class="btn btn-square btn-ghost">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="inline-block w-5 h-5 stroke-current"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+        ></path>
+      </svg>
+    </label>
+    <ul
+      tabindex="0"
+      class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+    >
+      <li><a>Profile</a></li>
+      <li><a href="/logout/">Logout</a></li>
+    </ul>
+  </div>
+</div>

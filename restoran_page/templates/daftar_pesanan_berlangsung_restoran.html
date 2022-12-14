@@ -1,0 +1,94 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full"> 
+    <div class="overflow-x-auto mt-5">
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th></th>
+            <th>Nama Pelanggan</th>
+            <th>Waktu Pesanan Dibuat</th>
+            <th>Status Pesanan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          {% for data in list %}
+          <tr>
+            <th></th>
+            <td>{{data.fname}} {{data.lname}}</td>
+            <td>{{data.datetime}}</td>
+            {% if data.tsid == 'TS01' %}
+            <td>Menunggu Konfirmasi Restoran</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="/restoran/pesanan-berlangsung/ringkasan/?email={{data.email}}&datetime={{data.datetime}}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+                <a
+                  href="/restoran/pesanan-berlangsung/konfirmasi/?email={{data.email}}&datetime={{data.datetime}}"
+                >
+                  <button class="btn">Konfirmasi</button>
+                </a>
+              </div>
+            </td>
+            {% elif data.tsid == 'TS02' %}
+            <td>Pesanan Dibuat</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="/restoran/pesanan-berlangsung/ringkasan/?email={{data.email}}&datetime={{data.datetime}}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+                <a
+                  href="/restoran/pesanan-berlangsung/kirim/?email={{data.email}}&datetime={{data.datetime}}"
+                >
+                  <button class="btn">Kirim</button>
+                </a>
+              </div>
+            </td>
+            {% else %}
+            <td>Pesanan Diantar</td>
+            <td>
+              <div class="">
+                <button class="btn btn-active">
+                  <a
+                    href="/restoran/pesanan-berlangsung/ringkasan/?email={{data.email}}&datetime={{data.datetime}}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+              </div>
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

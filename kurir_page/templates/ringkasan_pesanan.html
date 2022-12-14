@@ -1,0 +1,51 @@
+<!-- prettier-ignore -->
+{% extends 'baseBee.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Ringkasan Pesanan</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar.html' %}
+<h1 class="text-red-500">Ringkasan Pesanan</h1>
+{% for i in list_ringkasan %}
+    <p>Waktu Pemesanan: {{i.waktu}}</p>
+
+    <p>Nama Pelanggan: {{i.nama_pelanggan}}</br>
+    Jalan: {{i.jalan_pelanggan}}</br>
+    Kecamatan: {{i.kecamatan_pelanggan}}</br>
+    Kota: {{i.kota_pelanggan}}</br>
+    Provinsi: {{i.provinsi_pelanggan}}</p>
+
+    <p>Restoran: {{i.restoran}}</br>
+    Jalan: {{i.jalan_restoran}}</br>
+    Kecamatan: {{i.kecamatan_restoran}}</br>
+    Kota: {{i.kota_restoran}}</br>
+    Provinsi: {{i.provinsi_restoran}}</p>
+    {% for j, k, l in i.makanan, i.amount, i.notes %}
+        <p>Makanan yang dipesan:</br>
+            {{j}} ({{k}}) {% if l != '' %}- l{% endif %}</br>
+    {% endfor %}
+
+    Total Harga Makanan: 11000</br>
+    Total Diskon: 0</br>
+    Biaya Pengantaran: 4000</br>
+    Total Biaya: 15000</br>
+    Jenis Pembayaran: RestoPay</p>
+    
+    <p>Status Pembayaran: {{i.status_pembayaran}}</br>
+    Status Pesanan: {{i.status_pesanan}}</p>
+{% endfor %}
+
+{% for i in info_kurir %}
+<p>Kurir: {{i.nama_kurir}}</br>
+    Plat Kendaraan: {{i.plat_nomor}}</br>
+    Jenis Kendaraan: {{i.tipe_kendaraan}}</br>
+    Merk Kendaraan: {{i.merek}}</p>
+{% endfor %}
+
+<a type="button" class="btn btn-primary" href="{% url 'kurir_page:transaksi_pesanan' %}">[Kembali]</a>
+{% endblock content %}

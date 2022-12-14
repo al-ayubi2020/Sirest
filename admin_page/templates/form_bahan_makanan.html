@@ -1,0 +1,36 @@
+<!-- prettier-ignore -->
+{% extends 'base_admin.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore --> 
+{% block content %}
+{% include 'navbar.html' %}
+
+<h1 class="text-red-500">FORM BUAT BAHAN MAKANAN</h1>
+
+<form id="form" method="POST">
+  {% csrf_token %}
+  <label for="formInput">Nama Bahan Makanan: </label>
+  <input
+    type="text"
+    class="form-control"
+    id="formInput"
+    name="bahan_name"
+    required
+  />
+
+  <button
+    class="btn btn-primary btn-lg px-py-5 row my-2"
+    id="addButton"
+    type="submit"
+    value="Submit"
+  >
+    SIMPAN
+  </button>
+</form>
+{% endblock content %}

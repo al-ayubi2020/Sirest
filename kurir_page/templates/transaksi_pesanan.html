@@ -1,0 +1,71 @@
+<!-- prettier-ignore -->
+{% extends 'baseBee.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar.html' %}
+<h1 class="text-red-500">Daftar Pesanan Berlangsung</h1>
+
+<table class="table-auto">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Restoran - Cabang</th>
+      <th>Nama Pelanggan</th>
+      <th>Waktu Pesanan Dibuat</th>
+      <th>Status Pesanan</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tr in list_transaksi %}
+      {% if tr.status != 'Pesanan Selesai' %}
+        <tr>
+          <td>{{tr.no}}</td>
+          <td>{{tr.restoran}} {{tr.cabang}}</td>
+          <td>{{tr.nama_depan}} {{tr.nama_belakang}}</td>
+          <td>{{tr.waktu}}</td>
+          <td>{{tr.status}}</td>
+          <td>
+            <a
+              type="button"
+              class="btn btn-primary"
+              href="/kurir/ringkasan_pesanan/{{tr.email}}/{{tr.waktu}}"
+              >[Detail]</a
+            > 
+            <a type="button" class="btn btn-primary" href="/kurir/ubah_status_pesanan/{{tr.id_ts}}">[Selesai]</a>
+          </td>
+        </tr>
+      {% endif %}
+
+    {% endfor %}
+
+
+
+
+    {% comment %} <tr>
+      <td>1</td>
+      <td>Warung Mantap Depok</td>
+      <td>Mikayla Putri</td>
+      <td>2022-11-04 11:30:05</td>
+      <td>Pesanan Diantar</td>
+      <td>
+        <a
+          type="button"
+          class="btn btn-primary"
+          href="{% url 'kurir_page:ringkasan_pesanan' %}"
+          >[Detail]</a
+        >
+        <a type="button" class="btn btn-primary">[Selesai]</a>
+      </td>
+    </tr> {% endcomment %}
+  </tbody>
+</table>
+
+{% endblock content %}

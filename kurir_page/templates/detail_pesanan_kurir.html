@@ -1,0 +1,78 @@
+<!-- prettier-ignore -->
+{% extends 'base_kurir.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_kurir.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Detail Pesanan</h1>
+    <div class="mt-10">
+      <hr />
+      <p>Waktu Pemesanan: {{data.detail_transaksi.0.waktu_pemesanan}}</p>
+      <br />
+      <p>Nama Pelanggan: {{data.detail_transaksi.0.nama_pemesan}}</p>
+      <p>Jalan: {{data.detail_transaksi.0.jalan_pemesan}}</p>
+      <p>Kecamatan: {{data.detail_transaksi.0.kecamatan_pemesan}}</p>
+      <p>Kota: {{data.detail_transaksi.0.kota_pemesan}}</p>
+      <p>Provinsi: {{data.detail_transaksi.0.provinsi_pemesan}}</p>
+      <br />
+      <p>Restoran: {{data.detail_transaksi.0.nama_cabang_restoran}}</p>
+      <p>Jalan: {{data.detail_transaksi.0.jalan_restoran}}</p>
+      <p>Kecamatan: {{data.detail_transaksi.0.kecamatan_restoran}}</p>
+      <p>Kota: {{data.detail_transaksi.0.kota_restoran}}</p>
+      <p>Provinsi: {{data.detail_transaksi.0.provinsi_restoran}}</p>
+      <br />
+      <p>Makanan yang dipesan:</p>
+      <tr style="text-align: left">
+        <th>Makanan Yang Dipesan:</th>
+        {%for item in data.detail_transaksi.0.makanan_dipesan%}
+        <tr> </tr>
+        <th>- {{item.foodname}} ({{item.amount}}) - {{item.notes}}</th>
+        {%endfor%}
+      </tr>
+      <p>Total Harga Makanan: {{data.detail_transaksi.0.total_harga_makanan}}</p>
+      <p>Total Diskon: {{data.detail_transaksi.0.total_diskon}}</p>
+      <p>Biaya Pengantaran: {{data.detail_transaksi.0.biaya_pengantaran}}</p>
+      <p>Total Biaya: {{data.detail_transaksi.0.total_biaya}}</p>
+      <p>Jenis Pembayaran: {{data.detail_transaksi.0.jenis_pembayaran.0}}</p>
+      <br />
+      <p>Status Pembayaran: {{data.detail_transaksi.0.status_pembayaran}}</p>
+      <p>Status Pesanan: {{data.detail_transaksi.0.status_pesanan}}</p>
+      <br />
+      <p>Kurir: {{data.detail_transaksi.0.nama_kurir}}</p>
+      <p>Plat Kendaraan: {{data.detail_transaksi.0.plat}}</p>
+      <p>Jenis Kendaraan: {{data.detail_transaksi.0.jenis_kendaraan}}</p>
+      <p>Merk Kendaraan: {{data.detail_transaksi.0.merk_kendaraan}}</p>
+
+      <table border="1" cellspacing="2" cellpadding="8" align="left">
+        <tr>
+          <th>Status</th>
+          <th>Timestamp</th>
+        </tr>
+        <tr>
+          {% for status in data.detail_transaksi.0.status_timestamp %}
+          <td align="center">{{status.status}}</td>
+          <td align="center">{{status.timestamp}}</td>
+          {% endfor %}
+        </tr>
+      </table>
+
+      <a href="{% url 'kurir_page:riwayat_pesanan_kurir' %}">
+        <button
+          type="button"
+          class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block max-w-md"
+        >
+          <span class="inline-block mr-2">KEMBALI</span>
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

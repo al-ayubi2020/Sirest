@@ -1,0 +1,134 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Edit jam oprasional</title>
+<script>
+  $(document).on("submit", "#buatproject", function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'restoran_page:edit_jam_oprasional' %}",
+      data: {
+        start: $("#start").val(),
+        end: $("#end").val(),
+        day: $("#day").val(),
+      },
+      success: function (data) {
+        console.log(data);
+        if (data.message == "Berhasil Register") {
+          alert("Berhasil edit");
+          document.location.href = "/restoran/daftar-jam-oprasional/";
+        } else {
+          $.toast({
+            text: data.message,
+            showHideTransition: "fade",
+            bgColor: "#E01A31",
+            textColor: "#eee",
+            allowToastClose: true,
+            hideAfter: 2000,
+            stack: 5,
+            textAlign: "left",
+            position: "bottom-right",
+          });
+        }
+      },
+    });
+  });
+</script>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
+  <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+    <h1 class="font-bold text-center text-2xl mb-5">Edit Jam Oprasional</h1>
+    <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+      <div class="px-5 py-7">
+        <form action="" id="buatproject">
+          <label class="font-semibold text-sm text-gray-600 pb-1 block"
+            >Hari</label
+          >
+          <input
+            type="text"
+            class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+            id="day"
+            value="{{day}}"
+            disabled
+          />
+          <label class="font-semibold text-sm text-gray-600 pb-1 block"
+            >Jam buka:</label
+          >
+          <input
+            type="time"
+            class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+            id="start"
+          />
+          <label class="font-semibold text-sm text-gray-600 pb-1 block"
+            >Jam tutup:</label
+          >
+          <input
+            type="time"
+            class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+            id="end"
+          />
+          <button
+            type="submit"
+            class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
+          >
+            <span class="inline-block mr-2">Simpan</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-4 h-4 inline-block"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="py-5">
+      <div class="grid grid-cols-2 gap-1">
+        <div class="text-center sm:text-left whitespace-nowrap">
+          <a href="{% url 'restoran_page:daftar_jam_oprasional' %}">
+            <button
+              class="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-4 h-4 inline-block align-text-top"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              <span class="inline-block ml-1"
+                ><a href="{% url 'restoran_page:daftar_jam_oprasional' %}">
+                  Back</a
+                ></span
+              >
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

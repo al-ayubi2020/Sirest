@@ -1,0 +1,49 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Detail Pesanan</h1>
+    <div class="mt-10">
+      <hr />
+      <h1 class="justify-content-center">Detail Promosi</h1>
+
+      <h5>Nama Promosi : Promo 17 Agustusan</h5>
+
+      <h5>Jenis Promosi : Promo Hari Spesial</h5>
+
+      <h5>Diskon : 17%</h5>
+
+      <h5>Tanggal Mulai : 15-08-2022</h5>
+
+      <h5>Tanggal Berakhir : 20-08-2022</h5>
+
+      <a href="{% url 'restoran_page:ubah_promo' %}">
+        <button
+          type="button"
+          class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center max-w-md"
+        >
+          <span class="inline-block mr-2">UBAH</span>
+        </button>
+      </a>
+      <a href="{% url 'restoran_page:daftar_promo_restoran' %}">
+        <button
+          type="button"
+          class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center max-w-md"
+        >
+          <span class="inline-block mr-2">KEMBALI</span>
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

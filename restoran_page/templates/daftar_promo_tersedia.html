@@ -1,0 +1,69 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <div class="overflow-x-auto mt-5">
+      <p class="text-4xl font-bold text-center">Daftar Promo Tersedia</p>
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th>No</th>
+            <th>Nama Promosi</th>
+            <th>Periode Promosi</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          <tr>
+            <th>1</th>
+            <td>Promo 17 Agustusan</td>
+            <td>2022-08-15 s.d. 2022-08-20</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="{% url 'restoran_page:detail_promo' %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <!-- row 2 -->
+          <tr>
+            <th>1</th>
+            <td>B3LANJA 3 AJA</td>
+            <td>2022-08-15 s.d. 2022-08-20</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="{% url 'restoran_page:detail_promo' %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

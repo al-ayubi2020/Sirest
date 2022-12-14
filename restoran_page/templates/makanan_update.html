@@ -1,0 +1,180 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Ubah Makanan</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
+  <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+    <h1 class="font-bold text-center text-2xl mb-5">Ubah Makanan</h1>
+    <form method ="POST" action="{% url 'restoran_page:makanan_update' foodname %}" class="flex flex-col gap-[8px]">
+      {% csrf_token %}
+    <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+      <div class="px-5 py-7">
+        <label class="font-semibold text-sm text-gray-600 pb-1 block"
+          >Nama makanan</label
+        >
+        <input
+          type="text"
+          name="foodname"
+          class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+          value='{{foodname}}'
+          disabled
+        />
+        <label class="font-semibold text-sm text-gray-600 pb-1 block"
+          >Deskripsi</label
+        >
+        <input
+          type="text"
+          name="description"
+          class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+          value="{{description}}"
+          required
+        />
+        <label class="font-semibold text-sm text-gray-600 pb-1 block"
+          >Stok</label
+        >
+        <input
+          type="text"
+          name="stock"
+          class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+          value="{{stock}}"
+          required
+        />
+        <label class="font-semibold text-sm text-gray-600 pb-1 block"
+          >Harga</label
+        >
+        <input
+          type="text"
+          name="price"
+          class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+          value={{price}}
+          required
+        />
+        <label class="font-semibold text-sm text-gray-600 pb-1 block"
+            >Kategori Makanan</label
+          >
+          <select
+            class="select select-bordered w-full mb-5 mt-1"
+            name="kategori_makanan"
+            required
+          >
+            <option value={{fcategory_id}} selected>{{fcategory}}</option>
+            {% for data in category_list %}
+            <option value="{{data.id}}">{{data.name}}</option>
+            {% endfor %}
+          </select>
+
+        <label class="font-semibold text-sm text-gray-600 pb-1 block"
+          >Bahan Makanan</label
+        >
+
+        <div id="newElementId">
+          {% for cur_ing in ingredient %}
+          <select
+            class="select select-bordered w-full mb-5 mt-1"
+            name="bahan_makanan{{forloop.counter0}}"
+            id='input_text{{forloop.counter0}}'
+            required
+          >
+          <option value="{{cur_ing.id}}" selected>{{cur_ing.name}}</option>
+            {% for data in ingredient_list %}
+              {% if data.name != cur_ing.name %}
+                <option value="{{data.id}}">{{data.name}}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <div id="dynamicCheck">
+            <input type="button" id="button{{forloop.counter0}}" class="transition duration-200 bg-red-500 hover:bg-red-600 focus:bg-red-700 focus:shadow-sm focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 text-white w-1/2 py-2.5 mb-2 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block" value="Hapus Bahan Makanan" onclick="removeElement({{forloop.counter0}});"/>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div id="dynamicCheck">
+          <input
+            type="button"
+            class="transition duration-200 bg-green-500 hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 text-white w-1/2 py-2.5 mb-2 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
+            value="Tambah Bahan Makanan"
+            onclick="createNewElement();"
+          />
+        </div>
+
+        <button class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
+          Simpan 
+        </button>
+      </div>
+    </div>
+    </form>
+    {% for message in messages %}
+    {% if message.tags == 'success' %}
+      <div class="alert alert-success"> {{ message }}</div>
+    {% endif %}
+    {% if message.tags == 'error' %}
+      <div class="alert alert-error"> {{ message }}</div>
+    {% endif %}
+    {% endfor %}
+    <div class="py-5">
+      <div class="grid grid-cols-2 gap-1">
+        <div class="text-center sm:text-left whitespace-nowrap">
+          <a href="{% url 'restoran_page:makanan' %}">
+            <button
+              class="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-4 h-4 inline-block align-text-top"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              <span class="inline-block ml-1"
+                ><a href="{% url 'restoran_page:makanan' %}"> Back</a></span
+              >
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/JavaScript">
+  var size = {{size_ingredient}};
+  function createNewElement() {
+    var txtNewInputBox = document.createElement('div');
+    txtNewInputBox.innerHTML = `<select
+            class="select select-bordered w-full mb-5 mt-1"
+            name="bahan_makanan${size}"
+            id=input_text${size}
+            required
+          >
+          <option disabled selected>Pilih Bahan Makanan</option>
+            {% for data in ingredient_list %}
+            <option value="{{data.id}}">{{data.name}}</option>
+            {% endfor %}
+          </select>`
+    txtNewInputBox.innerHTML +=  `<div id="dynamicCheck">
+          <input type="button" id=button${size} class="transition duration-200 bg-red-500 hover:bg-red-600 focus:bg-red-700 focus:shadow-sm focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 text-white w-1/2 py-2.5 mb-2 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block" value="Hapus Bahan Makanan" onclick="removeElement(${size});"/>
+        </div>`
+    size++;
+    document.getElementById("newElementId").appendChild(txtNewInputBox);
+  }
+
+  function removeElement(removed_id) {
+      document.getElementById(`input_text${removed_id}`).remove();
+      document.getElementById(`button${removed_id}`).remove();
+  }
+</script>
+{% endblock content %}

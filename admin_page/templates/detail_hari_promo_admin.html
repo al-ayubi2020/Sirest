@@ -1,0 +1,30 @@
+<!-- prettier-ignore -->
+{% extends 'base_admin.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_admin.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Detail Promosi</h1>
+    <div class="mt-10">
+      <p>Jenis Promosi : Promo Hari Spesial</p>
+      <p>Nama Promosi : Promo 17 Agustusan</p>
+      <p>Diskon : 17%</p>
+      <p>Tanggal Berlangsung : 2022-08-17</p>
+
+      <button class="btn btn-danger">
+        <a href="{% url 'admin_page:daftar_promo' %}" class="text-white"
+          >Kembali</a
+        >
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock content %}

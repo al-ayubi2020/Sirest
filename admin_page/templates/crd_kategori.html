@@ -1,0 +1,62 @@
+<!-- prettier-ignore -->
+{% extends 'base_admin.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_admin.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Manage Kategori Makanan</h1>
+    <div class="overflow-x-auto mt-5" style="margin-top:100px">
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th>Nama</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          
+          {%for i in data%}
+          <tr>
+            <td>{{i}}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn">
+                  <a
+                    href=""
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    DELETE
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+          {%endfor%}
+         
+        </tbody>
+      </table>
+      <br>
+      <div>       
+        <button class="btn">
+          <a
+            href="{% url 'admin_page:tambah_kategori' %}"
+            class="h-full w-full flex items-center justify-center"
+          >
+            Tambah Kategori
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

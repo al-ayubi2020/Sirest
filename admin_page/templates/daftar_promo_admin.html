@@ -1,0 +1,95 @@
+<!-- prettier-ignore -->
+{% extends 'base_admin.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_admin.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <div class="overflow-x-auto mt-5">
+      <p class="text-4xl font-bold text-center">Daftar Promo Tersedia</p>
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th>No</th>
+            <th>Nama Promosi</th>
+            <th>Jenis Promosi</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          <tr>
+            <th>1</th>
+            <td>Promo 17 Agustusan</td>
+            <td>Promo Hari Spesial</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="{% url 'admin_page:detail_promo_hari' %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+                <button class="btn">
+                  <a
+                    href="{% url 'admin_page:ubah_promo' %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Ubah
+                  </a>
+                </button>
+                <button class="btn">
+                  <a class="h-full w-full flex items-center justify-center">
+                    Hapus
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <!-- row 2 -->
+          <tr>
+            <th>1</th>
+            <td>B3LANJA 3 AJA</td>
+            <td>Promo Minimum Transaksi</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="{% url 'admin_page:detail_promo_minimum' %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+                <button class="btn">
+                  <a
+                    href="{% url 'admin_page:ubah_promo' %}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Ubah
+                  </a>
+                </button>
+                <button class="btn">
+                  <a class="h-full w-full flex items-center justify-center">
+                    Hapus
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

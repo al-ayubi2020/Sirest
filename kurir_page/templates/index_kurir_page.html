@@ -1,0 +1,39 @@
+<!-- prettier-ignore -->
+{% extends 'base_kurir.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_kurir.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Dashboard Kurir</h1>
+    <h1 class="text-5xl font-bold">{{data.fname}} {{data.lname}}</h1>
+    <div class="mt-10">
+      <p>Email: {{data.email}}</p>
+      <p>Password: {{data.password}}</p>
+      <p>Nama: {{data.fname}} {{data.lname}}</p>
+      <p>Nomor HP: {{data.phonenum}}</p>
+      <p>NIK: {{data.nik}}</p>
+      <p>Nama bank: {{data.bankname}}</p>
+      <p>Nomor rekening: {{data.accountno}}</p>
+      <p>Plat Nomor Kendaraan: {{data.platenum}}</p>
+      <p>Nomor SIM: {{data.drivinglicensenum}}</p>
+      <p>Jenis kendaraan: {{data.vehicletype}}</p>
+      <p>Merk kendaraan: {{data.vehiclebrand}}</p>
+      {% if data.adminid != NULL %}
+      <p>Status: Sudah Verifikasi</p>
+      <p>Diverifikasi oleh: {{data.adminid}}</p>
+      {% else %}
+      <p>Status: Belum Verifikasi</p>
+      {% endif %}
+      <p>Saldo RestoPay: {{data.restopay}}</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

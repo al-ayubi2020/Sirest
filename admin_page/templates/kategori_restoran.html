@@ -1,0 +1,65 @@
+<!-- prettier-ignore -->
+{% extends 'base_admin.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Kategori Restoran</title>  
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar.html' %}
+
+
+<form id="form" method="POST">
+
+  <label for="formInput">Kategori Restoran</label>
+  <input
+    type="text"
+    class="form-control"
+    id="formInput"
+    name="category_name"
+    required
+  />
+
+  <button
+    class="btn btn-primary btn-lg px-py-5 row my-2"
+    id="addButton"
+    type="submit"
+    value="Submit"
+  >
+    Tambah Kategori
+  </button>
+</form>
+
+<h3>Kategori Restoran Saya</h3>
+<table class="table-auto">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Kategori Restoran</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for kategori in list_kategori %} 
+  <tr>
+    <td>{{kategori.id}}</td>
+    <td>{{kategori.nama}}</td>
+    {% if kategori.jumlah_refer < 1 %}
+    <td><a type="button" class="btn btn-primary" href="{% url 'admin_page:hapus_kategori_restoran' kategori.id %}">[Hapus]</a></td>
+    {% endif %}
+  </tr>
+ {% endfor %}
+</tbody>
+</table>
+
+
+
+
+
+
+
+{% endblock content %}

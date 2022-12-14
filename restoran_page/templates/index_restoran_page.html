@@ -1,0 +1,50 @@
+<!-- prettier-ignore -->
+{% extends 'base_restoran.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Dashboard Restoran</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_restoran.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Dashboard Restoran</h1>
+    <h1 class="text-5xl font-bold">{{data.fname}} {{data.lname}}</h1>
+    <div class="mt-10">
+      <p>Email: {{data.email}}</p>
+      <p>Password: {{data.password}}</p>
+      <p>Nama: {{data.fname}} {{data.lname}}</p>
+      <p>Nomor HP: {{data.phonenum}}</p>
+      <p>NIK: {{data.nik}}</p>
+      <p>Nama bank: {{data.bankname}}</p>
+      <p>Nomor rekening: {{data.accountno}}</p>
+      <p>Nama restoran: {{data.rname}}</p>
+      <p>Cabang: {{data.rbranch}}</p>
+      <p>Nomor telepon: {{data.rphonenum}}</p>
+      <p>Jalan: {{data.street}}</p>
+      <p>Kecamatan: {{data.district}}</p>
+      <p>Kota: {{data.city}}</p>
+      <p>Provinsi: {{data.province}}</p>
+      <p>Rating: {{data.rating}}</p>
+      <p>Kategori restoran: {{data.rcategory}}</p>
+      <p>Jam operasional: </p>
+      <ul class="list-disc list-inside">
+        {% for operate in operasional %}
+          <li>{{operate}}</li>
+        {% endfor %}
+      </ul>
+      {% if data.adminid != NULL %}
+      <p>Status: Sudah Verifikasi</p>
+      <p>Diverifikasi oleh: {{data.adminid}}</p>
+      {% else %}
+      <p>Status: Belum Verifikasi</p>
+      {% endif %}
+      <p>Saldo RestoPay: {{data.restopay}}</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

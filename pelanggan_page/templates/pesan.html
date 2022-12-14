@@ -1,0 +1,145 @@
+<!-- prettier-ignore -->
+{% extends 'base_pelanggan.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Hello, world!</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_pelanggan.html' %}
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
+  <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+    <h1 class="font-bold text-center text-2xl mb-5">PESAN MAKANAN</h1>
+    <div
+      class="bg-white shadow w-full rounded-lg divide-y divide-gray-200"
+      style="margin-left: -50%; width: 200%"
+    >
+    <form action="{% url 'pelanggan_page:pesan2' %}" method="post">
+      <div class="px-5 py-7">
+        <table class="table w-full table-normal">
+          <!-- head -->
+          <thead class="">
+            <tr>
+              <th></th>
+              <th>Nama Makanan</th>
+              <th>Harga</th>
+              <th>Jumlah</th>
+              <th>Catatan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+            <tr>
+              <th>1</th>
+              <td>Ayam Goreng</td>
+              <td>5000</td>
+              <td>
+                <input
+                  name="ayam_goreng"
+                  type="number"
+                  class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                />
+              </td>
+              <td>
+                <textarea
+                  class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                >
+                </textarea>
+              </td>
+            </tr>
+            <tr>
+              <th>2</th>
+              <td>Ice Cream</td>
+              <td>3000</td>
+              <td>
+                <input
+                  name="ice_cream"
+                  type="number"
+                  name="ice_cream"
+                  class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                />
+              </td>
+              <td>
+                <textarea
+                  name="c_ice_cream"
+                  class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                >
+                </textarea>
+              </td>
+            </tr>
+            <tr>
+              <th>3</th>
+              <td>Ikan Bakar</td>
+              <td>5000</td>
+              <td>
+                <input
+                  name="ikan_bakar"
+                  type="number"
+                  class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                />
+              </td>
+              <td>
+                <textarea
+                  name="c_ikan_bakar"
+                  class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                >
+                </textarea>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="5" align="center">
+                Pilih Metode Pembayaran dan Pengantaran
+              </th>
+            </tr>
+            <tr>
+              <th colspan="4">Metode Pengantaran</th>
+              <td>
+                <select
+                  class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" name="kendaraan"
+                >
+                  <option>Mobil</option>
+                  <option>Motor</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="4">Metode Pembayaran</th>
+              <td>
+                <select name="metode_pembayaran"
+                  class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                >
+                  <option>DEBIT</option>
+                  <option>CASH</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button
+          type="submit"
+          class="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
+        >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-4 h-4 inline-block"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

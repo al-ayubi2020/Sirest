@@ -1,0 +1,89 @@
+<!-- prettier-ignore -->
+{% extends 'base_admin.html' %}
+{% load static %}
+
+<!-- prettier-ignore -->
+{% block meta %}
+<title>Admin Dashboard</title>
+{% endblock meta %}
+
+<!-- prettier-ignore -->
+{% block content %}
+{% include 'navbar_admin.html' %}
+<div class="min-h-screen bg-base-200 flex justify-start p-10">
+  <div class="w-full">
+    <h1 class="text-5xl font-bold">Dashboard Admin</h1>
+    <h1 class="text-5xl font-bold">{{data.fname}} {{data.lname}}</h1>
+    <div class="mt-10">
+      <p>Email: {{data.email}}</p>
+      <p>Password: {{data.password}}</p>
+      <p>Nama: {{data.fname}} {{data.lname}}</p>
+      <p>Nomor HP: {{data.phonenum}}</p>
+    </div>
+    <div class="overflow-x-auto mt-5">
+      <table class="table w-full table-normal">
+        <!-- head -->
+        <thead class="">
+          <tr>
+            <th></th>
+            <th>Email</th>
+            <th>Nama</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          {% for data in list %}
+          <tr>
+            <th>1</th>
+            <td>{{data.email}}</td>
+            <td>{{data.fname}} {{data.lname}}</td>
+            <td>{{data.role}}</td>
+            {% if data.adminid == NULL %}
+            <td>Belum Terverifikasi</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-active">
+                  <a
+                    href="/admin/acc/?email={{data.email}}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Verifikasi
+                  </a>
+                </button>
+                <button class="btn">
+                  <a
+                    href="/admin/detail/?email={{data.email}}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+              </div>
+            </td>
+            {% else %}
+            <td>Terverifikasi</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn">
+                  <a
+                    href="/admin/detail/?email={{data.email}}"
+                    class="h-full w-full flex items-center justify-center"
+                  >
+                    Detail
+                  </a>
+                </button>
+              </div>
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+          <!-- row 2 -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
