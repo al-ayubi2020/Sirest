@@ -23,5 +23,4 @@ urlpatterns = [
     path('restoran/', include('restoran_page.urls')),
     path('kurir/', include('kurir_page.urls')),
     path('pelanggan/', include('pelanggan_page.urls')),
-    path("__reload__/", include("django_browser_reload.urls")),
 ]
