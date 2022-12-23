@@ -19,6 +19,12 @@ def index(request):
 
     email = request.session["email"]
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     customer_query = query(
         f"select * from user_acc natural join transaction_actor natural join restaurant join restaurant_category on rcategory = id WHERE email = '{email}'"
         )
@@ -28,7 +34,7 @@ def index(request):
     for data in customer_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'rname': data[10], 'rbranch': data[11], 'rphonenum': data[12], 'street': data[13], 'district': data[14], 'city': data[15], 'province': data[16], 'rating': data[17], 'rcategory': data[20]})
 
-    context = {}
+    context = {'verify': verify}
     context['operasional'] = []
     context['data'] = thisdict[0]
     jam_operasional = query(f"SELECT day, starthours, endhours FROM RESTAURANT_OPERATING_HOURS WHERE name='{context['data']['rname']}' AND branch='{context['data']['rbranch']}'")
@@ -45,11 +51,18 @@ def restopay(request):
         return redirect("/")
 
     email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     customer_query = query(
         f"select * from transaction_actor where email = '{email}'"
         )
         
-    return render(request, 'restopay_restoran.html', {'data': customer_query[0]})
+    return render(request, 'restopay_restoran.html', {'data': customer_query[0], 'verify': verify})
 
 @csrf_exempt
 def isi_saldo(request):
@@ -60,6 +73,12 @@ def isi_saldo(request):
         return redirect("/")
 
     email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
 
     if request.method == "POST":
         amount = int(request.POST.get("amount"))
@@ -76,7 +95,7 @@ def isi_saldo(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'isi_saldo_restoran.html', {'data': customer_query[0]})
+    return render(request, 'isi_saldo_restoran.html', {'data': customer_query[0], 'verify': verify})
 
 @csrf_exempt
 def tarik_saldo(request):
@@ -87,6 +106,12 @@ def tarik_saldo(request):
         return redirect("/")
 
     email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
 
     if request.method == "POST":
         amount = int(request.POST.get("amount"))
@@ -103,7 +128,7 @@ def tarik_saldo(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'tarik_saldo_restoran.html', {'data': customer_query[0]})
+    return render(request, 'tarik_saldo_restoran.html', {'data': customer_query[0], 'verify': verify})
 
 def daftar_jam_oprasional(request):
     if not is_authenticated(request):
@@ -113,6 +138,12 @@ def daftar_jam_oprasional(request):
         return redirect("/")
 
     email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
 
     resto_query = query(
         f"select * from restaurant where email = '{email}'"
@@ -134,7 +165,7 @@ def daftar_jam_oprasional(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'daftar_jam_oprasional.html', {'list':thisdict, 'data': customer_query[0]})
+    return render(request, 'daftar_jam_oprasional.html', {'list':thisdict, 'data': customer_query[0], 'verify': verify})
 
 @csrf_exempt
 def buat_jam_oprasional(request):
@@ -145,6 +176,12 @@ def buat_jam_oprasional(request):
         return redirect("/")
 
     email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
 
     resto_query = query(
         f"select * from restaurant where email = '{email}'"
@@ -171,7 +208,7 @@ def buat_jam_oprasional(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'buat_jam_oprasional.html', {'data': customer_query[0]})
+    return render(request, 'buat_jam_oprasional.html', {'data': customer_query[0], 'verify': verify})
 
 @csrf_exempt
 def edit_jam_oprasional(request):
@@ -182,6 +219,12 @@ def edit_jam_oprasional(request):
         return redirect("/")
 
     email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
 
     resto_query = query(
         f"select * from restaurant where email = '{email}'"
@@ -209,7 +252,7 @@ def edit_jam_oprasional(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'edit_jam_oprasional.html', {'day': day , 'data': customer_query[0]})
+    return render(request, 'edit_jam_oprasional.html', {'day': day , 'data': customer_query[0], 'verify': verify})
 
 @csrf_exempt
 def hapus_jam_oprasional(request):
@@ -244,6 +287,12 @@ def daftar_pesanan_berlangsung_restoran(request):
 
     email = request.session["email"]
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     resto_info_query = query(
         f"select rname, rbranch from restaurant where email = '{email}'"
         )
@@ -263,7 +312,7 @@ def daftar_pesanan_berlangsung_restoran(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'daftar_pesanan_berlangsung_restoran.html', {'list': thisdict, 'data':{'adminid':customer_query[0].adminid}})
+    return render(request, 'daftar_pesanan_berlangsung_restoran.html', {'list': thisdict, 'data':{'adminid':customer_query[0].adminid}, 'verify': verify})
 
 def ringkasan_pesanan_restoran(request):
     if not is_authenticated(request):
@@ -298,7 +347,15 @@ def ringkasan_pesanan_restoran(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'ringkasan_pesanan_restoran.html',{'list': pesanan_berlangsung_query[0], 'data':{'adminid':customer_query[0].adminid}})
+    email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, 'ringkasan_pesanan_restoran.html',{'list': pesanan_berlangsung_query[0], 'data':{'adminid':customer_query[0].adminid}, 'verify': verify})
 
 def konfirmasi(request):
     if not is_authenticated(request):
@@ -365,6 +422,12 @@ def makanan(request):
 
     email = request.session["email"]
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     customer_query = query(
         f"select * from user_acc natural join transaction_actor natural join restaurant join restaurant_category on rcategory = id WHERE email = '{email}'"
         )
@@ -374,7 +437,7 @@ def makanan(request):
     for data in customer_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'rname': data[10], 'rbranch': data[11], 'rphonenum': data[12], 'street': data[13], 'district': data[14], 'city': data[15], 'province': data[16], 'rating': data[17], 'rcategory': data[20]})
 
-    context = {}
+    context = {'verify': verify}
     context['data'] = thisdict[0]
     list_food = query(f"SELECT * FROM FOOD WHERE RNAME='{context['data']['rname']}' AND RBRANCH='{context['data']['rbranch']}'")
     cant_delete = query(f"SELECT FOODNAME FROM TRANSACTION_FOOD WHERE RNAME='{context['data']['rname']}' AND RBRANCH='{context['data']['rbranch']}'")
@@ -414,6 +477,12 @@ def makanan_buat(request):
 
     email = request.session["email"]
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     customer_query = query(
         f"select * from user_acc natural join transaction_actor natural join restaurant join restaurant_category on rcategory = id WHERE email = '{email}'"
         )
@@ -423,7 +492,7 @@ def makanan_buat(request):
     for data in customer_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'rname': data[10], 'rbranch': data[11], 'rphonenum': data[12], 'street': data[13], 'district': data[14], 'city': data[15], 'province': data[16], 'rating': data[17], 'rcategory': data[20]})
 
-    context = {}
+    context = {'verify': verify}
     context['data'] = thisdict[0]
 
     if request.method == "POST":
@@ -475,6 +544,12 @@ def makanan_update(request, id):
     
     email = request.session["email"]
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     customer_query = query(
         f"select * from user_acc natural join transaction_actor natural join restaurant join restaurant_category on rcategory = id WHERE email = '{email}'"
         )
@@ -484,7 +559,7 @@ def makanan_update(request, id):
     for data in customer_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'rname': data[10], 'rbranch': data[11], 'rphonenum': data[12], 'street': data[13], 'district': data[14], 'city': data[15], 'province': data[16], 'rating': data[17], 'rcategory': data[20]})
 
-    context = {}
+    context = {'verify': verify}
     context['data'] = thisdict[0]
 
     if request.method == "POST":
@@ -559,6 +634,12 @@ def makanan_delete(request, id):
     
     email = request.session["email"]
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     customer_query = query(
         f"select * from user_acc natural join transaction_actor natural join restaurant join restaurant_category on rcategory = id WHERE email = '{email}'"
         )
@@ -568,7 +649,7 @@ def makanan_delete(request, id):
     for data in customer_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'rname': data[10], 'rbranch': data[11], 'rphonenum': data[12], 'street': data[13], 'district': data[14], 'city': data[15], 'province': data[16], 'rating': data[17], 'rcategory': data[20]})
 
-    context = {}
+    context = {'verify': verify}
     context['data'] = thisdict[0]
 
     query(f"DELETE FROM FOOD WHERE RNAME='{context['data']['rname']}' AND RBRANCH='{context['data']['rbranch']}' AND foodname='{id}'")
@@ -583,6 +664,12 @@ def riwayat_pesanan_restoran(request):
         return redirect("/")
 
     email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
 
     transaksi_selesai = "TS04"
     transaksi_batal = "TS05"
@@ -616,6 +703,7 @@ def riwayat_pesanan_restoran(request):
     
         restaurant_query[i] = dic
     context['restaurant_query'] = restaurant_query
+    context['verify'] = verify
     #courier_email = thisdict[]
     return render(request, 'riwayat_pesanan_restoran.html', context)
 
@@ -627,6 +715,12 @@ def detail_pesanan(request, email, datetime):
         return redirect("/")
 
     email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
 
     data = {}
     transaction_detail = query(f'''
@@ -729,6 +823,8 @@ def detail_pesanan(request, email, datetime):
 
     context['data'] = data
 
+    context['verify'] = verify
+
     return render(request, "detail_pesanan_restoran.html", context)
 
 def daftar_promo_tersedia(request):
@@ -738,7 +834,15 @@ def daftar_promo_tersedia(request):
     if not get_role(request.session["email"], request.session["password"]) == "restaurant":
         return redirect("/")
 
-    return render(request, "daftar_promo_tersedia.html")
+    email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, "daftar_promo_tersedia.html" ,{'verify': verify})
 
 def daftar_promo_restoran(request):
     if not is_authenticated(request):
@@ -747,7 +851,15 @@ def daftar_promo_restoran(request):
     if not get_role(request.session["email"], request.session["password"]) == "restaurant":
         return redirect("/")
 
-    return render(request, "daftar_promo_restoran.html")
+    email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, "daftar_promo_restoran.html", {'verify': verify})
 
 def form_promo_resto(request):
     if not is_authenticated(request):
@@ -756,7 +868,15 @@ def form_promo_resto(request):
     if not get_role(request.session["email"], request.session["password"]) == "restaurant":
         return redirect("/")
 
-    return render(request, "form_promo_resto.html")
+    email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, "form_promo_resto.html", {'verify': verify})
 
 def detail_promo(request):
     if not is_authenticated(request):
@@ -764,8 +884,16 @@ def detail_promo(request):
     
     if not get_role(request.session["email"], request.session["password"]) == "restaurant":
         return redirect("/")
+    
+    email = request.session["email"]
 
-    return render(request, "detail_promo_resto.html")
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, "detail_promo_resto.html", {'verify': verify})
 
 def ubah_promo(request):
     if not is_authenticated(request):
@@ -773,5 +901,13 @@ def ubah_promo(request):
     
     if not get_role(request.session["email"], request.session["password"]) == "restaurant":
         return redirect("/")
+    
+    email = request.session["email"]
 
-    return render(request, "form_ubah_promo_resto.html")
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, "form_ubah_promo_resto.html", {'verify': verify})

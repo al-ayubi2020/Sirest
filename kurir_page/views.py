@@ -23,10 +23,16 @@ def index(request):
 
     thisdict = []
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     for data in courier_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'platenum': data[10], 'drivinglicensenum': data[11], 'vehicletype': data[12], 'vehiclebrand': data[13]})
 
-    return render(request, 'index_kurir_page.html', {'data': thisdict[0]})
+    return render(request, 'index_kurir_page.html', {'data': thisdict[0], 'verify': verify})
 
 def transaksi_pesanan(request):
     if not is_authenticated(request):
@@ -43,8 +49,17 @@ def transaksi_pesanan(request):
         transaksi_pesanan_dict.append({'no': counter, 'restoran': transaksi[0], 'cabang': transaksi[1], 'nama_depan': transaksi[2], 'nama_belakang': transaksi[3], 'waktu': transaksi[4].strftime("%Y-%m-%d %H:%M:%S"), 'status': transaksi[5], 'email': transaksi[6], 'id_ts': transaksi[7]})
         counter += 1
 
+    email = request.session["email"]
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     context = {
         'list_transaksi': transaksi_pesanan_dict,
+        'verify': verify
     }
 
     return render(request, 'transaksi_pesanan.html', context)
@@ -111,9 +126,18 @@ def ringkasan_pesanan(request, email, datetime):
     # for i in kurir_info_query:
     #     kurir_info_dict.append({'nama_kurir': f'{i[0]} {i[1]}', 'plat_nomor': i[2], 'tipe_kendaraan': i[3], 'merek': i[4]})
 
+    email = request.session["email"]
+    
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     context = {
         # 'list_ringkasan': ringkasan_pesanan_dict,
         # 'info_kurir': kurir_info_dict,
+        'verify': verify
     }
 
 
@@ -144,7 +168,13 @@ def restopay(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'restopay_kurir.html', {'data': customer_query[0]})
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, 'restopay_kurir.html', {'data': customer_query[0], 'verify': verify})
 
 @csrf_exempt
 def isi_saldo(request):
@@ -171,7 +201,13 @@ def isi_saldo(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'isi_saldo_kurir.html', {'data': customer_query[0]})
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, 'isi_saldo_kurir.html', {'data': customer_query[0], 'verify': verify})
 
 @csrf_exempt
 def tarik_saldo(request):
@@ -198,7 +234,13 @@ def tarik_saldo(request):
         f"select * from transaction_actor where email = '{email}'"
         )
 
-    return render(request, 'tarik_saldo_kurir.html', {'data': customer_query[0]})
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
+    return render(request, 'tarik_saldo_kurir.html', {'data': customer_query[0],'verify': verify })
 
 def makanan_kurir(request):
     if not is_authenticated(request):
@@ -219,12 +261,18 @@ def makanan_kurir(request):
         f"select * from user_acc natural join transaction_actor natural join courier WHERE email = '{email}'"
         )
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     thisdict = []
 
     for data in courier_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'platenum': data[10], 'drivinglicensenum': data[11], 'vehicletype': data[12], 'vehiclebrand': data[13]})
 
-    context = {}
+    context = {'verify': verify}
     context['data'] = thisdict[0] 
     resto = query("SELECT RNAME, RBRANCH, RATING FROM RESTAURANT")
     context['restaurant'] = []
@@ -234,6 +282,8 @@ def makanan_kurir(request):
         dic['url'] = str(data[0]) + '+' + str(data[1])
         dic['rating'] = data[2]
         context["restaurant"].append(dic)
+
+    
 
     return render(request, "makanan_kurir.html", context)
 
@@ -250,13 +300,19 @@ def makanan_detail_kurir(request, id):
         f"select * from user_acc natural join transaction_actor natural join courier WHERE email = '{email}'"
         )
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     thisdict = []
 
     for data in courier_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'platenum': data[10], 'drivinglicensenum': data[11], 'vehicletype': data[12], 'vehiclebrand': data[13]})
 
     id = id.split('+')
-    context = {}
+    context = {'verify': verify}
     context['data'] = thisdict[0] 
     cur_res = query(f"SELECT * FROM RESTAURANT WHERE rname='{id[0]}' AND rbranch='{id[1]}'")[0]
     kategori = query(f"SELECT NAME FROM RESTAURANT_CATEGORY WHERE id='{cur_res[9]}'")[0][0]
@@ -294,13 +350,19 @@ def makanan_menu_kurir(request, id):
         f"select * from user_acc natural join transaction_actor natural join courier WHERE email = '{email}'"
         )
 
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+
     thisdict = []
 
     for data in courier_query:
         thisdict.append({'email': data[0], 'password': data[1], 'phonenum': data[2], 'fname': data[3], 'lname': data[4], 'nik': data[5], 'bankname': data[6], 'accountno': data[7], 'restopay': data[8], 'adminid': data[9], 'platenum': data[10], 'drivinglicensenum': data[11], 'vehicletype': data[12], 'vehiclebrand': data[13]})
 
     id = id.split('+')
-    context = {}
+    context = {'verify': verify}
     context['data'] = thisdict[0]
     context['restaurant'] = []
     foods = query(f"SELECT * FROM FOOD WHERE rname='{id[0]}' AND rbranch='{id[1]}'")
@@ -364,6 +426,13 @@ def riwayat_pesanan_kurir(request):
     
         courier_query[i] = dic
     context['courier_query'] = courier_query
+
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
+    context['verify'] = verify
 
     return render(request, "riwayat_pesanan_kurir.html", context)
 
@@ -483,6 +552,12 @@ def detail_pesanan(request, email, datetime):
         "merk_kendaraan" : transaction_courier[9],
         "status_timestamp" : status_timestamp
     }]
+    verify_query = query(
+        f"select adminid from transaction_actor WHERE email = '{email}'"
+        )
+
+    verify = verify_query[0].adminid
 
     context['data'] = data
+    context['verify'] = verify
     return render(request, "detail_pesanan_kurir.html", context)

@@ -19,6 +19,7 @@
   <div class="flex-1">
     <a class="btn btn-ghost normal-case text-xl">SIREST</a>
   </div>
+  {% if verify != NULL %}
   <label class="btn btn-ghost hidden lg:flex"
     ><a
       href="{% url 'pelanggan_page:index' %}"
@@ -39,9 +40,13 @@
       tabindex="0"
       class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
     >
-      <li><a href="{% url 'pelanggan_page:pesan' %}"
-      class="h-full w-full items-center justify-center flex"
-      >Buat Pesanan</a></li>
+      <li>
+        <a
+          href="{% url 'pelanggan_page:pesan' %}"
+          class="h-full w-full items-center justify-center flex"
+          >Buat Pesanan</a
+        >
+      </li>
       <li>
         <a> Pesanan Berlangsung </a>
       </li>
@@ -62,6 +67,7 @@
       RestoPay</a
     ></label
   >
+  {% endif %}
   <div class="dropdown dropdown-end">
     <label tabindex="0" class="btn btn-square btn-ghost">
       <svg
