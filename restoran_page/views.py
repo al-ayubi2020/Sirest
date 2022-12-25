@@ -587,6 +587,7 @@ def makanan_update(request, id):
         else:
             feedback = query(f"UPDATE FOOD SET description='{query_food['description']}', stock='{query_food['stock']}', price='{query_food['price']}', fcategory='{query_food['kategori_makanan']}' WHERE RNAME='{context['data']['rname']}' AND RBRANCH='{context['data']['rbranch']}' AND foodname='{id}'")
             if type(feedback) == int:
+                feedback = query(f"DELETE FROM FOOD_INGREDIENT WHERE RNAME='{context['data']['rname']}' AND RBRANCH='{context['data']['rbranch']}' AND FoodName='{id}'")
                 for data in query_ingredient:
                     feedback = query(f"INSERT INTO FOOD_INGREDIENT VALUES ('{context['data']['rname']}', '{context['data']['rbranch']}', '{id}', '{data}')")
                 return redirect("restoran_page:makanan")
