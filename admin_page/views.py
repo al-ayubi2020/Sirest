@@ -8,6 +8,7 @@ from utils.query import query
 from landing_page.views import is_authenticated, get_role, get_role_email
 from datetime import datetime
 
+@csrf_exempt
 def index(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -71,6 +72,7 @@ def kategori_restoran(request):
 
     return render(request, 'kategori_restoran.html', context)
 
+@csrf_exempt
 def hapus_kategori_restoran(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -81,6 +83,7 @@ def hapus_kategori_restoran(request, id):
     query(f"delete from restaurant_category where id = '{id}'")
     return redirect("admin_page:kategori_restoran")
 
+@csrf_exempt
 def form_bahan_makanan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -102,6 +105,7 @@ def form_bahan_makanan(request):
 
     return render(request, 'form_bahan_makanan.html')
 
+@csrf_exempt
 def daftar_bahan_makanan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -124,6 +128,7 @@ def daftar_bahan_makanan(request):
     }
     return render(request, 'daftar_bahan_makanan.html', context)
 
+@csrf_exempt
 def hapus_bahan_makanan(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -133,7 +138,7 @@ def hapus_bahan_makanan(request, id):
     query(f"delete from ingredient where id = '{id}'")
     return redirect('admin_page:daftar_bahan_makanan')
     
-
+@csrf_exempt
 def detail(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -155,6 +160,7 @@ def detail(request):
 
     return render(request, 'detail_user.html', {'data': thisdict[0]})
 
+@csrf_exempt
 def acc(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -172,6 +178,7 @@ def acc(request):
 
     return redirect("/admin")
 
+@csrf_exempt
 def kategori(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -184,6 +191,7 @@ def kategori(request):
         data.append(x[1])
     return render(request, 'crd_kategori.html',{'data':data})
 
+@csrf_exempt
 def tambah_kategori(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -208,6 +216,7 @@ def tambah_kategoris(request):
     print(admin_result)
     return redirect("/admin/kategori")
 
+@csrf_exempt
 def tarif_pengiriman(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -224,7 +233,7 @@ def tarif_pengiriman(request):
     context = {"list_tarif" : list_tarif}
     return render(request, 'tarif_pengiriman.html', context)
 
-
+@csrf_exempt
 def tarif_pengiriman_buat(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -256,7 +265,7 @@ def tarif_pengiriman_buat(request):
     else:
         return render(request, 'tarif_pengiriman_buat.html')
 
-
+@csrf_exempt
 def tarif_pengiriman_update(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -291,6 +300,7 @@ def tarif_pengiriman_update(request, id):
 
     return render(request, 'tarif_pengiriman_update.html', context)
 
+@csrf_exempt
 def tarif_pengiriman_delete(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -301,7 +311,7 @@ def tarif_pengiriman_delete(request, id):
     query(f"DELETE FROM DELIVERY_FEE_PER_KM WHERE id='{id}'")
     return redirect("admin_page:tarif_pengiriman")
 
-
+@csrf_exempt
 def makanan_admin(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -320,6 +330,7 @@ def makanan_admin(request):
         context["restaurant"].append(dic)
     return render(request, "makanan_admin.html", context)
 
+@csrf_exempt
 def makanan_detail_admin(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -352,6 +363,7 @@ def makanan_detail_admin(request, id):
         context['promo'].append(query(f"SELECT PROMONAME FROM PROMO WHERE ID='{data[0]}'")[0][0])
     return render(request, "makanan_detail_admin.html", context)
 
+@csrf_exempt
 def makanan_menu_admin(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -384,6 +396,7 @@ def makanan_menu_admin(request, id):
 
     return render(request, "makanan_menu_admin.html", context)
 
+@csrf_exempt
 def buat_promo(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -393,6 +406,7 @@ def buat_promo(request):
 
     return render(request, "buat_promo_admin.html")
 
+@csrf_exempt
 def form_promo_hari(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -402,6 +416,7 @@ def form_promo_hari(request):
 
     return render(request, "form_hari_spesial.html")
 
+@csrf_exempt
 def form_promo_minimum(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -411,6 +426,7 @@ def form_promo_minimum(request):
 
     return render(request, "form_minimum_transaksi.html")
 
+@csrf_exempt
 def daftar_promo(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -420,6 +436,7 @@ def daftar_promo(request):
 
     return render(request, "daftar_promo_admin.html")
 
+@csrf_exempt
 def detail_promo_minimum(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -429,6 +446,7 @@ def detail_promo_minimum(request):
 
     return render(request, "detail_minimum_promo_admin.html")
 
+@csrf_exempt
 def detail_promo_hari(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -437,7 +455,8 @@ def detail_promo_hari(request):
         return redirect("/")
 
     return render(request, "detail_hari_promo_admin.html")
-    
+
+@csrf_exempt   
 def ubah_promo(request):
     if not is_authenticated(request):
         return redirect("/")

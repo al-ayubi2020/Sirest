@@ -8,6 +8,7 @@ from utils.query import query
 from landing_page.views import is_authenticated, get_role
 from datetime import datetime
 
+@csrf_exempt
 def index(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -34,6 +35,7 @@ def index(request):
 
     return render(request, 'index_kurir_page.html', {'data': thisdict[0], 'verify': verify})
 
+@csrf_exempt
 def transaksi_pesanan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -64,6 +66,7 @@ def transaksi_pesanan(request):
 
     return render(request, 'transaksi_pesanan.html', context)
 
+@csrf_exempt
 def ringkasan_pesanan(request, email, datetime):
     if not is_authenticated(request):
         return redirect("/")
@@ -143,6 +146,7 @@ def ringkasan_pesanan(request, email, datetime):
 
     return render(request, 'ringkasan_pesanan.html', context)
 
+@csrf_exempt
 def ubah_status_pesanan(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -155,7 +159,7 @@ def ubah_status_pesanan(request, id):
     print(482903820)
     return redirect('/kurir/transaksi_pesanan')
     
-
+@csrf_exempt
 def restopay(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -242,6 +246,7 @@ def tarik_saldo(request):
 
     return render(request, 'tarik_saldo_kurir.html', {'data': customer_query[0],'verify': verify })
 
+@csrf_exempt
 def makanan_kurir(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -287,6 +292,7 @@ def makanan_kurir(request):
 
     return render(request, "makanan_kurir.html", context)
 
+@csrf_exempt
 def makanan_detail_kurir(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -337,6 +343,7 @@ def makanan_detail_kurir(request, id):
         context['promo'].append(query(f"SELECT PROMONAME FROM PROMO WHERE ID='{data[0]}'")[0][0])
     return render(request, "makanan_detail_kurir.html", context)
 
+@csrf_exempt
 def makanan_menu_kurir(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -387,6 +394,7 @@ def makanan_menu_kurir(request, id):
 
     return render(request, "makanan_menu_kurir.html", context)
 
+@csrf_exempt
 def riwayat_pesanan_kurir(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -436,6 +444,7 @@ def riwayat_pesanan_kurir(request):
 
     return render(request, "riwayat_pesanan_kurir.html", context)
 
+@csrf_exempt
 def detail_pesanan(request, email, datetime):
     if not is_authenticated(request):
         return redirect("/")

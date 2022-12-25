@@ -8,6 +8,7 @@ from utils.query import query
 from landing_page.views import is_authenticated, get_role
 from datetime import datetime
 
+@csrf_exempt
 def index(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -34,6 +35,7 @@ def index(request):
 
     return render(request, 'index_pelanggan_page.html', {'data': thisdict[0], 'verify': verify})
 
+@csrf_exempt
 def restopay(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -122,6 +124,7 @@ def tarik_saldo(request):
 
     return render(request, 'tarik_saldo_pelanggan.html', {'data': customer_query[0], 'verify': verify})
 
+@csrf_exempt
 def pemesanan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -139,6 +142,7 @@ def pemesanan(request):
 
     return render(request, 'pemesanan.html', {'verify': verify})
 
+@csrf_exempt
 def form_alamat(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -156,6 +160,7 @@ def form_alamat(request):
 
     return render(request, 'form_alamat.html', {'verify': verify})
 
+@csrf_exempt
 def pesan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -224,6 +229,7 @@ def pesan2(request):
 
     return render(request, 'pesan2.html',{'data': data,"pengantaran":kendaraan,"b_kendaraan":b_kendaraan,"metode_pembayaran":metode_pembayaran,"total":total,"totals":totals, 'verify': verify})
 
+@csrf_exempt
 def konfirmasi(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -241,6 +247,7 @@ def konfirmasi(request):
 
     return render(request, 'konfirmasi.html' ,{'verify': verify})
 
+@csrf_exempt
 def ringkasan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -258,6 +265,7 @@ def ringkasan(request):
 
     return render(request, 'ringkasan.html',{'verify': verify})
 
+@csrf_exempt
 def pesanan_berlangsung(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -275,6 +283,7 @@ def pesanan_berlangsung(request):
 
     return render(request, 'pesanan_berlangsung.html',{'verify': verify})
 
+@csrf_exempt
 def makanan_pelanggan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -320,6 +329,7 @@ def makanan_pelanggan(request):
 
     return render(request, "makanan_pelanggan.html", context)
 
+@csrf_exempt
 def makanan_detail_pelanggan(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -377,6 +387,7 @@ def makanan_detail_pelanggan(request, id):
 
     return render(request, "makanan_detail_pelanggan.html", context)
 
+@csrf_exempt
 def makanan_menu_pelanggan(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -445,6 +456,7 @@ def makanan_menu_pelanggan(request, id):
     
     return render(request, "makanan_menu_pelanggan.html", context)
 
+@csrf_exempt
 def riwayat_pesanan_pelanggan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -497,6 +509,7 @@ def riwayat_pesanan_pelanggan(request):
 
     return render(request, 'riwayat_pesanan_pelanggan.html', context)
 
+@csrf_exempt
 def detail_pesanan(request, email, datetime):
     if not is_authenticated(request):
         return redirect("/")
@@ -617,6 +630,7 @@ def detail_pesanan(request, email, datetime):
 
     return render(request, "detail_pesanan.html", context)
 
+@csrf_exempt
 def show_form_penilaian(request):
     if not is_authenticated(request):
         return redirect("/")

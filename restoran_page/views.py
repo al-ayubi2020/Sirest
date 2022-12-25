@@ -10,6 +10,7 @@ from landing_page.views import is_authenticated, get_role
 import datetime
 import random
 
+@csrf_exempt
 def index(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -43,6 +44,7 @@ def index(request):
         context["operasional"].append(cur_time)
     return render(request, 'index_restoran_page.html', context)
 
+@csrf_exempt
 def restopay(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -130,6 +132,7 @@ def tarik_saldo(request):
 
     return render(request, 'tarik_saldo_restoran.html', {'data': customer_query[0], 'verify': verify})
 
+@csrf_exempt
 def daftar_jam_oprasional(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -278,6 +281,7 @@ def hapus_jam_oprasional(request):
 
     return redirect("/restoran/daftar-jam-oprasional/")
 
+@csrf_exempt
 def daftar_pesanan_berlangsung_restoran(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -314,6 +318,7 @@ def daftar_pesanan_berlangsung_restoran(request):
 
     return render(request, 'daftar_pesanan_berlangsung_restoran.html', {'list': thisdict, 'data':{'adminid':customer_query[0].adminid}, 'verify': verify})
 
+@csrf_exempt
 def ringkasan_pesanan_restoran(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -357,6 +362,7 @@ def ringkasan_pesanan_restoran(request):
 
     return render(request, 'ringkasan_pesanan_restoran.html',{'list': pesanan_berlangsung_query[0], 'data':{'adminid':customer_query[0].adminid}, 'verify': verify})
 
+@csrf_exempt
 def konfirmasi(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -377,6 +383,7 @@ def konfirmasi(request):
 
     return redirect("/restoran/pesanan-berlangsung/")
 
+@csrf_exempt
 def kirim(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -413,6 +420,7 @@ def kirim(request):
 
     return redirect("/restoran/pesanan-berlangsung/")
 
+@csrf_exempt
 def makanan(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -468,6 +476,7 @@ def makanan(request):
     return render(request, 'makanan.html', context)
 
 # kinda done
+@csrf_exempt
 def makanan_buat(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -535,6 +544,7 @@ def makanan_buat(request):
     
     return render(request, 'makanan_buat.html', context)
 
+@csrf_exempt
 def makanan_update(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -625,6 +635,7 @@ def makanan_update(request, id):
  
     return render(request, 'makanan_update.html', context)
 
+@csrf_exempt
 def makanan_delete(request, id):
     if not is_authenticated(request):
         return redirect("/")
@@ -656,6 +667,7 @@ def makanan_delete(request, id):
 
     return redirect("restoran_page:makanan")
 
+@csrf_exempt
 def riwayat_pesanan_restoran(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -707,6 +719,7 @@ def riwayat_pesanan_restoran(request):
     #courier_email = thisdict[]
     return render(request, 'riwayat_pesanan_restoran.html', context)
 
+@csrf_exempt
 def detail_pesanan(request, email, datetime):
     if not is_authenticated(request):
         return redirect("/")
@@ -827,6 +840,7 @@ def detail_pesanan(request, email, datetime):
 
     return render(request, "detail_pesanan_restoran.html", context)
 
+@csrf_exempt
 def daftar_promo_tersedia(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -861,6 +875,7 @@ def daftar_promo_restoran(request):
 
     return render(request, "daftar_promo_restoran.html", {'verify': verify})
 
+@csrf_exempt
 def form_promo_resto(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -878,6 +893,7 @@ def form_promo_resto(request):
 
     return render(request, "form_promo_resto.html", {'verify': verify})
 
+@csrf_exempt
 def detail_promo(request):
     if not is_authenticated(request):
         return redirect("/")
@@ -895,6 +911,7 @@ def detail_promo(request):
 
     return render(request, "detail_promo_resto.html", {'verify': verify})
 
+@csrf_exempt
 def ubah_promo(request):
     if not is_authenticated(request):
         return redirect("/")
