@@ -37,7 +37,7 @@
           <!-- row 1 -->
           {% for data in list %}
           <tr>
-            <th>1</th>
+            <th>{{forloop.counter}}</th>
             <td>{{data.email}}</td>
             <td>{{data.fname}} {{data.lname}}</td>
             <td>{{data.role}}</td>
